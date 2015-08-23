@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMApp", "BMApp\BMApp.csproj", "{EB4FC946-5891-4CD9-ADAC-CB998682527D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMApp.Tests", "BMApp.Tests\BMApp.Tests.csproj", "{5F0AFE79-09E2-4791-983A-90E42480C130}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB4FC946-5891-4CD9-ADAC-CB998682527D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB4FC946-5891-4CD9-ADAC-CB998682527D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB4FC946-5891-4CD9-ADAC-CB998682527D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB4FC946-5891-4CD9-ADAC-CB998682527D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0AFE79-09E2-4791-983A-90E42480C130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0AFE79-09E2-4791-983A-90E42480C130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0AFE79-09E2-4791-983A-90E42480C130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0AFE79-09E2-4791-983A-90E42480C130}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
