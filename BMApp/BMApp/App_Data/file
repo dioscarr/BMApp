@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ArrayOfManagementPemissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ManagementPemissions>
+    <ID>1</ID>
+    <Name>John Doe</Name>
+    <BuildingID>B1</BuildingID>
+  </ManagementPemissions>
+  <ManagementPemissions>
+    <ID>1</ID>
+    <Name>Greg Doe</Name>
+    <BuildingID>B2</BuildingID>
+  </ManagementPemissions>
+</ArrayOfManagementPemissions>

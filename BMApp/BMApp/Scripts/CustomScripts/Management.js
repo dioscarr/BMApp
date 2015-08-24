@@ -19,16 +19,15 @@
 
         self.employeeResult = ko.observableArray(Employees);
         self.query = ko.observable('');
-        self.query.subscribe(function (searcKey) {
-            debugger;
-                self.employeeResult.removeAll();
 
-                for (var x in Employees) {
-                    if (Employees[x].Name.toLowerCase().indexOf(searcKey.toLowerCase()) >= 0) {
-                        self.employeeResult.push(Employees[x]);
-                    }
-                }
+       
 
+        self.employeeResult = ko.computed(function () {
+            var query = self.query();
+           // alert('IN');
+            return ko.utils.arrayFilter(self.employeeResult(), function (user) {
+                return user.Name.indexOf(query) > -1 || user.Name.indexOf(query) > -1;
+            });
 
            
         });
