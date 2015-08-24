@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row before_header_space" ">
+</div>
+<div class="row BM_row_header nopadding outline">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header_outer outline ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header outline">
+
+        </div>        
+    </div>
+</div>
+<div class="row BM_row_content nopadding outline">
+    <div class="col-lg-12 col-md-12 col-sm-12 colxs-12 BM_content_outer outline">
+        <!--Left-->
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 BM_content_inner_left nopadding outline">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee_inner outline">
+                <input type="search" id="searchbar" placeholder="Search for Employee" autocomplete="off" data-bind="value:query, valueUpdate:'afterkeydown'" />
+            </div>
+            <!--employee result container-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee outline pre-scrollable" data-bind="foreach:employeeResult">
+                <span data-bind="text:Name"></span>
+                <hr/>
+            </div>
+        </div>
+        <!--Right-->
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 BM_content_inner_right nopadding outline">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 buildingLabels outline">
+                <input type="search" id="searchbar" placeholder="Search for Location" />
+            </div>
+            <!--employee result container-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Location outline pre-scrollable ">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+<script src="~/Scripts/CustomScripts/Management.js"></script>
+    <script type="text/javascript">
+       
+    </script>
+}
