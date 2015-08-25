@@ -1,5 +1,5 @@
 ﻿$(function () {
-    alert('yes');
+    //alert('yes');
     var viewModel = function(){
         self.Showme = ko.observable('this is an observable');
 
@@ -16,24 +16,27 @@
             { "Name": "Ken Goldsmith" },
             { "Name": "Kerry Jones" },
             { "Name": "Vanessa Williams" }]
-
+        self.AddEmployee = ko.observable("");
         self.employeeResult = ko.observableArray(Employees);
         self.query = ko.observable('');
 
+        self.AddNewEmployee = function () {
+            Employees.push({ Name: self.AddEmployee() });
+            self.employeeResult = ko.computed(function () { return Employees; });            
+            self.AddEmployee('');
+        }
        
-
+        $('html').keyup(function (e) 
+        {  if (e.keyCode == 8)
+                self.employeeResult = ko.computed(function () { return Employees; });            
+        });
         self.employeeResult = ko.computed(function () {
             var query = self.query();
-           // alert('IN');
-            return ko.utils.arrayFilter(self.employeeResult(), function (user) {
-                return user.Name.indexOf(query) > -1 || user.Name.indexOf(query) > -1;
-            });
-
-           
-        });
-
-      
-
+            return ko.utils.arrayFilter(self.employeeResult(), function (Emp) {
+                var name = Emp.Name.toLowerCase();
+                return name.indexOf(query) > -1 || Emp.Name.indexOf(query) > -1;
+               });
+        });   
         self.LoadPermissions = function () {
             $.ajax({
                 type:"GET",
@@ -41,7 +44,7 @@
                 datatype: "json",
                 success: function (returnPermissions) {
                     var Permissions = JSON.stringify(returnPermissions.Data);
-                    alert(Permissions);
+                    //alert(Permissions);
                 }               
             });
         }
