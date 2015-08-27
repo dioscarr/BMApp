@@ -4,51 +4,175 @@
 }
 
 
-<div class="row before_header_space" ">
+
+
+
+@*<div class="row before_header_space" >
+    </div>
+    <div class="row BM_row_header nopadding ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header_outer  ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header  nopadding">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  " style="height:inherit;">
+                    <br />
+                    <input type="text" id="" placeholder="Full Name:" autocomplete="off" />
+                    <br />
+                    <br />
+                    <input type="text" id="" placeholder="Tel:" autocomplete="off"  />
+                    <br />
+                    <br />
+                    <input type="text" id="" placeholder="Email:" autocomplete="off"  />
+                    <br />
+                    <br />
+                    <button type="button"class="btn btn-default input-sm" >Add Employee</button>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9  " style="height:inherit;">
+                </div>
+                </div>
+        </div>
+    </div>
+    <div class="row BM_row_content nopadding ">
+        <div class="col-lg-12 col-md-12 col-sm-12 colxs-12 BM_content_outer ">
+            <!--Left-->
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 BM_content_inner_left nopadding ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee_inner ">
+                    <input type="search" id="searchbar" placeholder="Search for Employee" autocomplete="off"  />
+                </div>
+                <!--employee result container-->
+                
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee  pre-scrollable" >
+                        <div data-ng-controller="ContactsCtrl">
+                            {{contacts}}
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <hr />
+                        </div>
+                </div>
+            </div>
+            <!--Right-->
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 BM_content_inner_right nopadding ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 buildingLabels ">
+                    <input type="search" id="searchbar" placeholder="Search for Location" />
+                </div>
+                <!--employee result container-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Location  pre-scrollable ">
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+<div class="row before_header_space" >
 </div>
-<div class="row BM_row_header nopadding outline">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header_outer outline ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header outline">
-            <span>Full Name:</span>
-            <br/>
-            <input type="search" id="" placeholder="Search for Employee" autocomplete="off" data-bind="value:AddEmployee, valueUpdate:'afterkeydown'" />
-           <br/>
-             <button class="btn btn-default input-sm" data-bind="click:AddNewEmployee">Add Employee</button>
-        </div>        
+<div class="row BM_row_header nopadding ">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header_outer  ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header  nopadding">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  " style="height:inherit;">              
+                <br />
+                <input type="text" id="" placeholder="Full Name:" autocomplete="off" data-bind="value:AddEmployee, valueUpdate:'afterkeydown'" />
+                <br />
+                <br />
+                <input type="text" id="" placeholder="Tel:" autocomplete="off" data-bind="value:AddTel, valueUpdate:'afterkeydown'" />
+                <br />
+                <br />
+                <input type="text" id="" placeholder="Email:" autocomplete="off" data-bind="value:AddEmail, valueUpdate:'afterkeydown'" />
+                <br />
+                <br />
+                <button type="button"class="btn btn-default input-sm" data-bind="click:AddNewEmployee">Add Employee</button>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9  " style="height:inherit;">
+            </div>
+            </div>        
     </div>
 </div>
-<div class="row BM_row_content nopadding outline">
-    <div class="col-lg-12 col-md-12 col-sm-12 colxs-12 BM_content_outer outline">
+<div class="row BM_row_content nopadding ">
+    <div class="col-lg-12 col-md-12 col-sm-12 colxs-12 BM_content_outer ">
         <!--Left-->
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 BM_content_inner_left nopadding outline">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee_inner outline">
-                <input type="search" id="searchbar" placeholder="Search for Employee" autocomplete="off" data-bind="value:query, valueUpdate:'afterkeydown'" />
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_content_inner_left nopadding ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee_inner ">
+                <input type="search" id="searchbar" placeholder="Search for Employee / Location" class="form-control" autocomplete="off" data-bind="value:query, valueUpdate:'afterkeydown'" />
             </div>
+
+
             <!--employee result container-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee outline pre-scrollable" data-bind="foreach:employeeResult">
-                <span data-bind="text:Name"></span>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee  pre-scrollable" >
+                
+                <table id="managementtable" class="table  table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <td>Employees</td>
+                           @{for (var i = 0; i < 10; i++)
+                           {
+                                <td>Company 1</td>
+                                <td>Company 2</td>
+                                <td>Company 3</td>
+                                <td>Company 4</td>
+                                <td>Company 5</td>
+                           }
+                           }
+                               
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:employeeResult">
+                        <tr>
+                            <td>
+                                <span data-bind="text:Name"></span>
+                                <span data-bind="text:Tel"></span>                               
+                                <span data-bind="text:Email"></span>
+                                <button type="button" class="btn btn-link" data-bind="click:removeEmp">Remove</button>
+                            </td>
+                           @{for (var i = 0; i < 10; i++)
+                           {
+                            <td><input type="checkbox" class="checkbox   " /> </td>
+                            <td><input type="checkbox" /></td>
+                            <td><input type="checkbox" /></td>
+                            <td><input type="checkbox" /></td>
+                            <td><input type="checkbox" /></td>
+
+                           }}
+                               
+                            
+</tr>
+                    </tbody>
+                </table>
+                
                 <hr/>
             </div>
         </div>
-        <!--Right-->
-        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 BM_content_inner_right nopadding outline">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 buildingLabels outline">
-                <input type="search" id="searchbar" placeholder="Search for Location" />
-            </div>
-            <!--employee result container-->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Location outline pre-scrollable ">
-
-            </div>
-        </div>
+       
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
 @section scripts
     {
-    <script src="~/Scripts/jquery-2.1.4.js"></script>
-    <script src="~/Scripts/knockout-3.3.0.js"></script>
-<script src="~/Scripts/CustomScripts/Management.js"></script>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>    
+    <script src="~/Scripts/knockout-3.3.0.js"></script>    
+    <script src="~/Scripts/CustomScripts/Management.js"></script>
     <script type="text/javascript">
-       
+        $(function () {
+           
+        });
     </script>
+
+
+
+
+
+
+
+
+
+   
 }
