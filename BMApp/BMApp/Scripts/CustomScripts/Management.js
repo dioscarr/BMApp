@@ -1,12 +1,5 @@
 ﻿$(function () {   
     var viewModel = function(){
-
-      
-          
-       
-
-
-
         self.Showme = ko.observable('this is an observable');
         self.Emp1 = ko.observableArray();      
         //self.Emp1.push(
@@ -56,16 +49,20 @@
         });
         self.employeeResult = ko.observableArray();
         self.query = ko.observable('');
+        //Remove employee
         self.removeEmp = function (data) {
             alert(JSON.stringify(data));
+            alert(data);
         }
 
+        //compares strings from name with the text just entered in the textbox
         var stringStartsWith = function (string, startsWith) {
             string = string || "";
             if (startsWith.length > string.length)
                 return false;
             return string.substring(0, startsWith.length) === startsWith;
         };
+        //query filtering
         self.query.subscribe(function (keys) {
             var myArray = self.Emp1();
             var Result = myArray.filter(function (value, index, array)
@@ -93,7 +90,7 @@
                 Tel:  self.AddTel('');
                 Email: self.AddEmail('');
             }
-      
+      //load 
         self.LoadPermissions = function () {
             $.ajax({
                 type:"GET",

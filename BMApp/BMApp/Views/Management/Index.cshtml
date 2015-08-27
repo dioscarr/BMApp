@@ -71,15 +71,12 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header_outer  ">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_header  nopadding">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  " style="height:inherit;">              
+                
+                <input type="text" id="" placeholder="Full Name:"class="form-control" autocomplete="off" data-bind="value:AddEmployee, valueUpdate:'afterkeydown'" />
                 <br />
-                <input type="text" id="" placeholder="Full Name:" autocomplete="off" data-bind="value:AddEmployee, valueUpdate:'afterkeydown'" />
+                <input type="text" id="" placeholder="Tel:" autocomplete="off" class="form-control" data-bind="value:AddTel, valueUpdate:'afterkeydown'" />
                 <br />
-                <br />
-                <input type="text" id="" placeholder="Tel:" autocomplete="off" data-bind="value:AddTel, valueUpdate:'afterkeydown'" />
-                <br />
-                <br />
-                <input type="text" id="" placeholder="Email:" autocomplete="off" data-bind="value:AddEmail, valueUpdate:'afterkeydown'" />
-                <br />
+                <input type="text" id="" placeholder="Email:" autocomplete="off" class="form-control" data-bind="value:AddEmail, valueUpdate:'afterkeydown'" />
                 <br />
                 <button type="button"class="btn btn-default input-sm" data-bind="click:AddNewEmployee">Add Employee</button>
             </div>
@@ -104,36 +101,33 @@
                     <thead>
                         <tr>
                             <td>Employees</td>
-                           @{for (var i = 0; i < 10; i++)
-                           {
+                          
                                 <td>Company 1</td>
                                 <td>Company 2</td>
                                 <td>Company 3</td>
                                 <td>Company 4</td>
                                 <td>Company 5</td>
-                           }
-                           }
+                          
                                
                         </tr>
                     </thead>
                     <tbody data-bind="foreach:employeeResult">
                         <tr>
                             <td>
-                                <span data-bind="text:Name"></span>
-                                <span data-bind="text:Tel"></span>                               
-                                <span data-bind="text:Email"></span>
-                                <button type="button" class="btn btn-link" data-bind="click:removeEmp">Remove</button>
+                                <div>
+                                    <span data-bind="text:Name"></span>
+                                    <span data-bind="text:Tel"></span>
+                                    <span data-bind="text:Email"></span>
+                                    <button type="button" class="btn btn-link" data-bind="click:removeEmp">Remove</button>
+                                </div>
                             </td>
-                           @{for (var i = 0; i < 10; i++)
-                           {
+                          
                             <td><input type="checkbox" class="checkbox   " /> </td>
                             <td><input type="checkbox" /></td>
                             <td><input type="checkbox" /></td>
                             <td><input type="checkbox" /></td>
                             <td><input type="checkbox" /></td>
-
-                           }}
-                               
+                            
                             
 </tr>
                     </tbody>
@@ -162,6 +156,12 @@
     <script src="~/Scripts/CustomScripts/Management.js"></script>
     <script type="text/javascript">
         $(function () {
+
+            //$('#managementtable').find('tr').each(function () {
+            //    $(this).find('td:last').after('<td>new cell added</td>');
+            //});
+            debugger;
+            $('#managementtable').find('tr').each(function () { $(this).find('td:last').after('<td>ok</td>') });
            
         });
     </script>
