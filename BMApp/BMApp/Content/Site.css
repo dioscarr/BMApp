@@ -115,9 +115,19 @@ min-height:70px;
     
     }
 .BM_Employee {
-min-height:550PX;
+
 height:550PX;
 
+min-width:400px;
+
+ overflow-x: scroll; 
+
+
+
+}
+
+td {
+min-width:150px;
 }
 
 .BM_Location {
@@ -126,4 +136,7 @@ height:550PX;
 min-width:100px;
 
 }
+.checkPermission {
 
+height:50px; width:150px; padding:15px;
+}
