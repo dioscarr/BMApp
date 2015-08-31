@@ -108,7 +108,8 @@
         <!--Left-->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_content_inner_left nopadding ">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 BM_Employee_inner ">
-                <input type="search" id="searchbar" placeholder="Search for Employee / Location" class="form-control" autocomplete="off" data-bind="value:query, valueUpdate:'afterkeydown'" />
+                @*<input type="search" id="searchbar" placeholder="Search for Employee / Location" class="form-control" autocomplete="off" data-bind="value:query, valueUpdate:'afterkeydown'" />*@
+                <input type="search" id="searchbar" placeholder="Search for Employee / Location" class="form-control" autocomplete="off" />
             </div>
 
 
@@ -118,28 +119,28 @@
                 <table id="managementtable" class="table  table-bordered table-striped table-hover">
                     <thead>
                         <tr>
-                            <td style="width:430px;">Employees</td>                                  
+                            <td style="width:430px; ">Employees</td>                                  
                         </tr>
                     </thead>
-                    <tbody data-bind="foreach:employeeResult">
-                        <tr>
-                            <td >
+                    <tbody id="fbody" data-bind="foreach:employeeResult">
+                        <tr data-bind="attr: { 'data-empID': id }">
+                            <td>
                                 <div style="width:430px;">
                                     <span data-bind="text:Name"></span>
-                                    <span data-bind="text:Tel"></span><br/>
+                                    <span data-bind="text:Tel"></span><br />
                                     <span data-bind="text:Email"></span>
                                     <button type="button" class="btn btn-link" data-bind="click:removeEmp">Remove</button>
                                 </div>
                             </td>
-                          
+
                             @*<td><input type="checkbox" class="checkbox   " /> </td>
-                            <td><input type="checkbox" /></td>
-                            <td><input type="checkbox" /></td>
-                            <td><input type="checkbox" /></td>
-                            <td><input type="checkbox" /></td>*@
-                            
-                            
-</tr>
+                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" /></td>
+                <td><input type="checkbox" /></td>*@
+
+
+                        </tr>
                     </tbody>
                 </table>
                 
@@ -152,13 +153,6 @@
     
 
 </div>
-
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="newlycreatedtable">
-
-    </div>
-</div>
-
 
 
 

@@ -8,7 +8,7 @@
 
         var url = "http://www.filltext.com/?callback=?";
         $.getJSON(url, {
-            'rows': 2,
+            'rows': 500,
             'id':'{number}',
             'Name': '{firstName}',
             'Tel': '{phone}',
@@ -24,77 +24,62 @@
         self.employeeResult = ko.observableArray();
         self.query = ko.observable('');
         //Remove employee
-        self.removeEmp = function (data, event) {
-           
-            alert();
+        self.removeEmp = function (data) {
+            var a = ko.toJS(data);
+            var s = JSON.stringify(a);
+            alert(s);
         }
-        //compares strings from name with the text just entered in the textbox
-        var stringStartsWith = function (string, startsWith) {
-            string = string || "";
-            if (startsWith.length > string.length)
-                return false;
-            return string.substring(0, startsWith.length) === startsWith;
-        };
-        //query filtering
-        self.query.subscribe(function (keys) {
-            var myArray = self.Emp1();
-            var Result = myArray.filter(function (value, index, array)
-            {
-                var returnedvalue = stringStartsWith(array[index].Name().toLowerCase(), keys.toLowerCase());
-                if (returnedvalue) { return array[index]; }
-            });
-            self.employeeResult([]);
-            self.employeeResult(Result);
-            // setTimeout(function () { loaddata(); }, 100);
-            if (initialcompCount > 0)
-            {
-                var i = 0;
-                for (var j = 0; j < initialcompCount; j++)
-                {               
-                $('#managementtable').find('tbody tr').each(function ()
-                {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" </label></div></td>');
-                });
-                }
-            }
-            if (Result.length > 0  ) {
-                if (newcompanycount > 0) {
-                    //debugger;
-                    regeneratecolumns(newcompanycount, Result.length);
-                }
-            }
-        });
+       
         //regenerate columns
         function regeneratecolumns(numberofcolumns, foundcount) {
            
                 for (var i = 0; i < numberofcolumns; i++) {
                     $('#managementtable').find('tbody tr').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"> <input type="checkbox" > Add Permission </label></div></td>');
+                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"> <input type="checkbox" class="checkperm" data-PermID="" >Access</label></div></td>');
                     }); }}       
         //=============================================================================================
         // new Employee
             self.AddNewEmployee = function () {       
                 self.employeeResult.push({
+                    id: ko.observable('225'),
                      Name:  ko.observable(self.AddEmployee()),
                      Tel:  ko.observable(self.AddTel()),
                      Email:  ko.observable(self.AddEmail())
                  });
-                 self.Emp1.push({
+                self.Emp1.push({
+                    id: ko.observable('225'),
                      Name:  ko.observable(self.AddEmployee()),
                      Tel:  ko.observable(self.AddTel()),
                      Email:  ko.observable(self.AddEmail())
                  });
-                 if (initialcompCount > 0) {
+                if (initialcompCount > 0) {
+                    //var empR = self.employeeResult();
+                    //var k = 0;
+                    //if (k > empR.length - 1) { k = 0; }
                      var i = 0;
                      for (var j = 0; j < initialcompCount; j++) {
-                         $('#managementtable').find('tbody tr:last').each(function () {                                                     
-                             $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" </label></div></td>');
+                         $('#managementtable').find('tbody tr:last').each(function () {
+                             //$(this).attr("data-EmpID", empR[k].id());
+                             $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" class="checkperm" data-PermID=""> Access</label></div></td>');
                          });
+                         //k++;
                      }
                  }
                  if (newcompanycount > 0) {
                      regeneratelasttrcolumns(newcompanycount);
                  }
+
+                 $('#managementtable').find('tbody tr').each(function () {
+                     debugger;
+                     $(this).find('td').each(function () {
+                         $(this).find('.checkperm').attr('data-PermID', "yey");
+
+                     })
+                 });
+
+
+
+
                  self.AddEmployee('');
                 Tel:  self.AddTel('');
                 Email: self.AddEmail('');
@@ -104,7 +89,7 @@
                 debugger;
                 for (var i = 0; i < numberofcolumns; i++) {
                     $('#managementtable').find('tbody tr:last').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"> <input type="checkbox" > Add Permission </label></div></td>');
+                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission" > <input type="checkbox" class="checkperm" data-PermID="">Access</label></div></td>');
                     });}}
 
       ////load 
@@ -136,7 +121,8 @@
                         $(this).find('td:last').after('<td>' + self.CompanyAddress() + '</td>');
                     });
                     $('#managementtable').find('tbody tr').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" > Add Permission </label></div></td>');
+                       
+                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" class="checkperm" data-PermID="" > Add Permission </label></div></td>');
                     }); }
         //Adding company column on the table
             self.compantlist = [];
@@ -166,35 +152,103 @@
             {
                 // alert(self.Companies().length)
                 var empR = self.employeeResult();
+                var k = 0;
                 for (var i = 0; i < self.Companies().length; i++) {
                     //debugger;   
                     $('#managementtable').find('thead tr').each(function () {
-                        $(this).find('td:last').after('<td>' + self.compantlist[i].id + '</td>');
+                        $(this).find('td:last').after('<td data-buildingID = "' + self.compantlist[i].id + '">' + self.compantlist[i].Name + '</td>');
                     });
-
-                    $('#managementtable').find('tbody tr').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox"  > <label class="checkPermission"  ><input type="checkbox" class="checkperm" data-bind="click:insertpermission"  data-AccessID="' + self.compantlist[i].id + '">Access </label></div></td>');
+                    if (k > empR.length-1) {k = 0;}                   
+                    $('#managementtable').find('tbody tr').each(function () {    
+                        $(this).attr("data-EmpID",  empR[k].id() );
+                        $(this).find('td:last').after('<td ><div class="checkbox"  > <label class="checkPermission"  ><input type="checkbox" class="checkperm" data-bind="click:insertpermission" data-PermID="" data-AccessID="' + self.compantlist[i].id + '">Access </label></div></td>');
+                        k++;
                     });
-                }
-                           
-                for (var i = 0; i < empR.length; i++)
-                {
-
-                    
-                    empR[i].id();
                 }
             }
         //permission
-            self.permissions = ko.observableArray([]);
-            self.perm = ko.observable(false);
-            var lastselectedpermID = ""
-            $(document).on("click", ".checkperm", function (data,event) {               
-                lastselectedpermID = $(this).attr('data-AccessID'); //permission ID
-                if($(this).is(':checked')){ self.perm(true); }
-                else if ($(this).not(':checked')){self.perm(false);}
+            self.objPermissions = ko.observableArray([]);
+            self.perm = ko.observable(false);          
+
+            $(document).on("click", ".checkperm", function (data, event) {
+                //alert('click');
+                var currentE = $(this);
+                var currentTDIndex = $(this).closest('td').index();               
+
+                var selectedCompID = $(this).closest('table').find('thead td').eq(currentTDIndex).attr("data-buildingID");//location ID
+                var selectedEmpID = $(this).closest('tr').attr("data-empid");//Employee ID                   
+              
+                if ($(this).is(':checked')) {
+                    self.perm(true);
+                    $(this).closest('tr').find('td:first').addClass("Empselectchk");
+                    $(this).closest('table').find('thead td').eq(currentTDIndex).addClass("Empselectchk");
+                    //setting up permission Object
+                    var d = new Date(); // for now
+                    d.getHours(); // => 9
+                    d.getMinutes(); // =>  30
+                    d.getSeconds(); // => 51
+
+                    self.objPermissions.push({
+                        EmployeeID: selectedEmpID,
+                        LocationID: selectedCompID,
+                        PermissionID: selectedCompID + selectedEmpID 
+                                            });
+
+                    alert(JSON.stringify(self.objPermissions()));
+
+                }
+                else if ($(this).not(':checked')) {
+                    self.perm(false);
+                    $(this).closest('tr').find('td:first').removeClass("Empselectchk");
+                    $(this).closest('table').find('thead td').eq(currentTDIndex).removeClass("Empselectchk");
+                    
+                    var result = self.objPermissions().filter(function (el) {
+                        return el.PermissionID !== selectedCompID + selectedEmpID;
+                    });
+                    self.objPermissions(result);
+                    alert(JSON.stringify(self.objPermissions()));
+                }
             });
-            self.perm.subscribe(function (value) {
-                alert('about to insert values ' + value);
+            //self.perm.subscribe(function (value) {
+            //    alert('about to insert values ' + value);
+        //});
+
+
+        //test search
+        //==============================================================================================================================
+
+        $("#searchbar").keyup(function () {
+                //split the current value of searchInput
+                var data = this.value.split(" ");
+                //create a jquery object of the rows
+                var jo = $("#fbody").find("tr");
+                if (this.value == "") {
+                    jo.show();
+                    return;
+                }
+                //hide all the rows
+                jo.hide();
+
+                //Recusively filter the jquery object to get results.
+                jo.filter(function (i, v) {
+                    var $t = $(this);
+                    for (var d = 0; d < data.length; ++d) {
+                        if ($t.is(":contains('" + data[d] + "')")) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                //show the rows that match.
+                .show();
+            }).focus(function () {
+                this.value = "";
+                $(this).css({
+                    "color": "black"
+                });
+                $(this).unbind('focus');
+            }).css({
+                "color": "#C0C0C0"
             });
     }
     ko.applyBindings(viewModel);
