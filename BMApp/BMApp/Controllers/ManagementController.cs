@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using BMApp.Models;
 using BMApp.Workers;
 
@@ -18,9 +19,12 @@ namespace BMApp.Controllers
             return View();
         }
 
-
-        public ActionResult SavesPermissions(List<ManagementPemissions> model)
+        [HttpPost]
+        public ActionResult SavesPermissions(List<Employee> model)
         {
+
+            
+
 
             var path = Server.MapPath("~/App_Data/Management");
             bool resultcheck = System.IO.File.Exists(path);
@@ -32,18 +36,23 @@ namespace BMApp.Controllers
 
             WriteToFile a = new WriteToFile();//Custom helper
             a.SerializeObject(model, path);
-            var s = a.DeSerializeObject<List<ManagementPemissions>>(path);
+            var s = a.DeSerializeObject<List<Employee>>(path);
             return View();
         }
 
-        public JsonResult LoadPermissions()
+        public JsonResult LoadEmployees()
         {
+
+
+
+
             var path = Server.MapPath("~/App_Data/Management");  
             bool resultcheck = System.IO.File.Exists(path);
             if (resultcheck) 
             {
                 WriteToFile a = new WriteToFile();//Custom helper
-                var s = a.DeSerializeObject<List<ManagementPemissions>>(path);
+                var s = Employee.loadData();
+                
                 var permissions = Json(s);
                 return new JsonResult { Data = permissions, JsonRequestBehavior = JsonRequestBehavior.AllowGet };            
             }           

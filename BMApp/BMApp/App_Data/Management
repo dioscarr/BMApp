@@ -1,13 +1,45 @@
 <?xml version="1.0"?>
-<ArrayOfManagementPemissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ManagementPemissions>
+<ArrayOfEmployee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Employee>
+    <ID>0</ID>
+    <Name>Dioscar Rodriguez</Name>
+    <Tel>3472009415</Tel>
+    <Email>Diosc@gmail.com</Email>
+    <BuildingID>45</BuildingID>
+  </Employee>
+  <Employee>
     <ID>1</ID>
-    <Name>John Doe</Name>
-    <BuildingID>B1</BuildingID>
-  </ManagementPemissions>
-  <ManagementPemissions>
-    <ID>1</ID>
-    <Name>Greg Doe</Name>
-    <BuildingID>B2</BuildingID>
-  </ManagementPemissions>
-</ArrayOfManagementPemissions>
+    <Name>Juan G</Name>
+    <Tel>4587965588</Tel>
+    <Email>HJuan@hotmai.com</Email>
+    <BuildingID>45</BuildingID>
+  </Employee>
+  <Employee>
+    <ID>2</ID>
+    <Name>Hug Smith</Name>
+    <Tel>69855444755</Tel>
+    <Email>Hug@gmaul.com</Email>
+    <BuildingID>45</BuildingID>
+  </Employee>
+  <Employee>
+    <ID>3</ID>
+    <Name>Dionel Rodriguez</Name>
+    <Tel>6984572244</Tel>
+    <Email>Dionel@gmail.com</Email>
+    <BuildingID>45</BuildingID>
+  </Employee>
+  <Employee>
+    <ID>4</ID>
+    <Name>Cristina Rodriguez</Name>
+    <Tel>3472049492</Tel>
+    <Email>Cristina@gmail.com</Email>
+    <BuildingID>45</BuildingID>
+  </Employee>
+<Employee>
+    <ID>6</ID>
+    <Name>Sonia Rodriguez50</Name>
+    <Tel>3472049492</Tel>
+    <Email>Cristina@gmail.com</Email>
+    <BuildingID>50</BuildingID>
+  </Employee>
+</ArrayOfEmployee>

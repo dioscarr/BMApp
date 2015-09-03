@@ -6,19 +6,27 @@
         self.AddTel = ko.observable("");
         self.AddEmail = ko.observable("");
 
-        var url = "http://www.filltext.com/?callback=?";
-        $.getJSON(url, {
-            'rows': 500,
-            'id':'{number}',
-            'Name': '{firstName}',
-            'Tel': '{phone}',
-            'Email': '{email}'
-        })
-        .success(function (data) {           
-            for (var i = 0; i < data.length; i++)
-            {
-                self.Emp1.push({ id: ko.observable(data[i].id), Name: ko.observable(data[i].Name), Tel: ko.observable(data[i].Tel), Email: ko.observable(data[i].Email) });
-                self.employeeResult.push({ id: ko.observable(data[i].id), Name: ko.observable(data[i].Name), Tel: ko.observable(data[i].Tel), Email: ko.observable(data[i].Email) });
+        //var url = "http://www.filltext.com/?callback=?";
+        //$.getJSON(url, {
+        //    'rows': 500,
+        //    'id':'{number}',
+        //    'Name': '{firstName}',
+        //    'Tel': '{phone}',
+        //    'Email': '{email}'
+        //})
+
+        $.ajax({
+            type: "GET",
+            url: "/management/LoadEmployees",
+            datatype: "json",
+            success: function (returned) {
+                var returnresult = JSON.stringify(returned.Data);
+                var data = JSON.parse(returnresult)
+                
+                for (var i = 0; i < data.length; i++) {
+                    self.Emp1.push({ id: ko.observable(data[i].ID), Name: ko.observable(data[i].Name), Tel: ko.observable(data[i].Tel), Email: ko.observable(data[i].Email) });
+                    self.employeeResult.push({ id: ko.observable(data[i].ID), Name: ko.observable(data[i].Name), Tel: ko.observable(data[i].Tel), Email: ko.observable(data[i].Email) });
+                }
             }
         });
         self.employeeResult = ko.observableArray();
@@ -33,77 +41,103 @@
         //regenerate columns
         function regeneratecolumns(numberofcolumns, foundcount) {
            
-                for (var i = 0; i < numberofcolumns; i++) {
-                    $('#managementtable').find('tbody tr').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"> <input type="checkbox" class="checkperm" data-PermID="" >Access</label></div></td>');
-                    }); }}       
+            for (var i = 0; i < numberofcolumns; i++) {
+                $('#managementtable').find('tbody tr').each(function () {
+                    $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"> <input type="checkbox" class="checkperm" data-PermID="" >Access</label></div></td>');
+                }); }}       
         //=============================================================================================
         // new Employee
-            self.AddNewEmployee = function () {       
-                self.employeeResult.push({
-                    id: ko.observable('225'),
-                     Name:  ko.observable(self.AddEmployee()),
-                     Tel:  ko.observable(self.AddTel()),
-                     Email:  ko.observable(self.AddEmail())
-                 });
-                self.Emp1.push({
-                    id: ko.observable('225'),
-                     Name:  ko.observable(self.AddEmployee()),
-                     Tel:  ko.observable(self.AddTel()),
-                     Email:  ko.observable(self.AddEmail())
-                 });
-                if (initialcompCount > 0) {
-                    //var empR = self.employeeResult();
-                    //var k = 0;
-                    //if (k > empR.length - 1) { k = 0; }
-                     var i = 0;
-                     for (var j = 0; j < initialcompCount; j++) {
-                         $('#managementtable').find('tbody tr:last').each(function () {
-                             //$(this).attr("data-EmpID", empR[k].id());
-                             $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" class="checkperm" data-PermID=""> Access</label></div></td>');
-                         });
-                         //k++;
-                     }
-                 }
-                 if (newcompanycount > 0) {
-                     regeneratelasttrcolumns(newcompanycount);
-                 }
+        var ids = 0;
 
-                 $('#managementtable').find('tbody tr').each(function () {
-                     debugger;
-                     $(this).find('td').each(function () {
-                         $(this).find('.checkperm').attr('data-PermID', "yey");
+        self.AddNewEmployee = function () {
+            Employee.model.push({
+                "ID": ids,
+                "Name": self.AddEmployee(),
+                "Tel": self.AddTel(),
+                "Email": self.AddEmail(),
+                "BuildingID": "45"
 
-                     })
-                 });
+            });
+          
 
+            ids++;
 
-
-
-                 self.AddEmployee('');
-                Tel:  self.AddTel('');
-                Email: self.AddEmail('');
-            }
-        //regenerate last row columns
-            function regeneratelasttrcolumns(numberofcolumns) {
-                debugger;
-                for (var i = 0; i < numberofcolumns; i++) {
+            self.employeeResult.push({
+                id: ko.observable('225'),
+                Name:  ko.observable(self.AddEmployee()),
+                Tel:  ko.observable(self.AddTel()),
+                Email:  ko.observable(self.AddEmail())
+            });
+            self.Emp1.push({
+                id: ko.observable('225'),
+                Name:  ko.observable(self.AddEmployee()),
+                Tel:  ko.observable(self.AddTel()),
+                Email:  ko.observable(self.AddEmail())
+            });
+            if (initialcompCount > 0) {
+                //var empR = self.employeeResult();
+                //var k = 0;
+                //if (k > empR.length - 1) { k = 0; }
+                var i = 0;
+                for (var j = 0; j < initialcompCount; j++) {
                     $('#managementtable').find('tbody tr:last').each(function () {
-                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission" > <input type="checkbox" class="checkperm" data-PermID="">Access</label></div></td>');
-                    });}}
+                        //$(this).attr("data-EmpID", empR[k].id());
+                        $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission"><input type="checkbox" class="checkperm" data-PermID=""> Access</label></div></td>');
+                    });
+                    //k++;
+                }
+            }
+            if (newcompanycount > 0) {
+                regeneratelasttrcolumns(newcompanycount);
+            }
 
-      ////load 
-      //  self.LoadPermissions = function () {
-      //      $.ajax({
-      //          type:"GET",
-      //          url: "/Management/LoadPermissions/",
-      //          datatype: "json",
-      //          success: function (returnPermissions) {
-      //              var Permissions = JSON.stringify(returnPermissions.Data);  
-      //          }               
-      //      });
-      //  }
-        //  self.LoadPermissions();
+            $('#managementtable').find('tbody tr').each(function () {
+                debugger;
+                $(this).find('td').each(function () {
+                    $(this).find('.checkperm').attr('data-PermID', "yey");
+
+                })
+            });
+
+
+
+
+            self.AddEmployee('');
+            Tel:  self.AddTel('');
+            Email: self.AddEmail('');
+        }
+        //regenerate last row columns
+        function regeneratelasttrcolumns(numberofcolumns) {
+            debugger;
+            for (var i = 0; i < numberofcolumns; i++) {
+                $('#managementtable').find('tbody tr:last').each(function () {
+                    $(this).find('td:last').after('<td><div class="checkbox" > <label class="checkPermission" > <input type="checkbox" class="checkperm" data-PermID="">Access</label></div></td>');
+                });}}
+
+        //load 
+
+        var Employee = {"model":[]};
+          
+
+           //JSON.stringify(Employee)
+        
+           self.insertEmployees = function () {         
+            $.ajax({
+                type: "Post",
+                data: Employee,
+                url: "/Management/SavesPermissions/",
+                datatype: "json",
+                success: function (returnPermissions) {
+                    var Permissions = JSON.stringify(returnPermissions.Data);
+                    alert(Permissions);
+                }               
+            }).done(function(){
+            Employee = {"model":[]};
+            
+            });
+           }
+       
+       
 
         //Setting Company
             self.CompanyName = ko.observable();
@@ -257,7 +291,7 @@
 
     $(document).ready(function () {
 
-        
+      
 
             
 
